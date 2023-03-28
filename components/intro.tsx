@@ -1,6 +1,14 @@
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
 export default function LoadingScreen() {
+  const router = useRouter();
+
+  /** 2초 후 페이지 이동 */
+  setTimeout(() => {
+    router.push('/poster');
+  }, 2000);
+
   return (
     <Container className="logo">
       <Logo>GPTFLIX</Logo>
