@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Movie } from '@/type/movie';
 import LoadingSpinner from '@/components/LoadingSpinner ';
+import Modal from '@/components/modal';
 import { getTrendingMovie } from './api/movie';
 import styled, { keyframes } from 'styled-components';
 
@@ -25,7 +26,14 @@ export default function poster({ movieList }: MovieListProps) {
     preloadImages(movieList).then(() => setIsLoaded(true));
   }, [movieList]);
 
-  return isLoaded ? <Container movieList={movieList}></Container> : <LoadingSpinner />;
+  return isLoaded ? (
+    <>
+      <Container movieList={movieList}></Container>
+      <Modal />
+    </>
+  ) : (
+    <LoadingSpinner />
+  );
 }
 
 /** API 호출하여 페이지에 props로 Data 전달 함수 */
@@ -41,17 +49,20 @@ const backgroundSlider = (movieList: Movie[]) => keyframes`
   0% {
     background-image: url(https://image.tmdb.org/t/p/w500/${movieList[0].poster_path});
   }
-  25% {
+  20% {
     background-image: url(https://image.tmdb.org/t/p/w500/${movieList[1].poster_path});
   }
-  50% {
+  40% {
     background-image: url(https://image.tmdb.org/t/p/w500/${movieList[2].poster_path});
   }
-  75% {
+  60% {
     background-image: url(https://image.tmdb.org/t/p/w500/${movieList[3].poster_path});
   }
-  100% {
+  80% {
     background-image: url(https://image.tmdb.org/t/p/w500/${movieList[4].poster_path});
+  }
+  100% {
+    background-image: url(https://image.tmdb.org/t/p/w500/${movieList[0].poster_path});
   }`;
 
 const Container = styled.div<MovieListProps>`
