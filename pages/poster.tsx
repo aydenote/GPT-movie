@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import { Movie } from '@/type/movie';
 import LoadingSpinner from '@/components/LoadingSpinner ';
-import styled, { keyframes } from 'styled-components';
 import { getTrendingMovie } from './api/movie';
+import styled, { keyframes } from 'styled-components';
 
 type MovieListProps = {
   movieList: Movie[];
