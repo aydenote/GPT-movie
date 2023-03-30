@@ -1,4 +1,4 @@
-export interface Movie {
+export type Movie = {
   adult: boolean;
   backdrop_path: string;
   genre_ids: number[];
@@ -14,4 +14,12 @@ export interface Movie {
   video: boolean;
   vote_average: number;
   vote_count: number;
-}
+};
+
+export type ReduxType = {
+  currentId: number;
+  dataList: {
+    question: string;
+    answer: string;
+  }[];
+};
