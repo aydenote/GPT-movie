@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Movie } from '@/type/movie';
+import { Movie } from '@/type';
 import LoadingSpinner from '@/components/LoadingSpinner ';
 import Modal from '@/components/modal';
 import { getTrendingMovie } from './api/movie';
