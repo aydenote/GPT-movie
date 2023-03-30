@@ -25,8 +25,13 @@ const questionSlice = createSlice({
         draft.dataList[id].answer = answer;
       });
     },
+    BEFORE: state => {
+      return produce(state, draft => {
+        draft.currentId -= 1;
+      });
+    },
   },
 });
 
-export const { ADD, UPDATE } = questionSlice.actions;
+export const { ADD, UPDATE, BEFORE } = questionSlice.actions;
 export default questionSlice.reducer;
