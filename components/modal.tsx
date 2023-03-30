@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ADD, UPDATE } from '../redux/reducers/question';
+import { ADD, UPDATE, RESET } from '../redux/reducers/question';
 import { useRouter } from 'next/router';
 import BeforeButton from './button/before';
 import NextButton from './button/next';
@@ -59,7 +59,10 @@ export default function modal() {
     return questionJson.filter(item => item.id === questionAnswer.currentId)[0]?.example;
   }
 
-
+  // 페이지 로딩 시 기존 state 초기화
+  useEffect(() => {
+    dispatch(RESET());
+  }, []);
 
   return (
     <Container>
