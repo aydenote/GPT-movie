@@ -10,8 +10,23 @@ const questionSlice = createSlice({
   name: 'QnA',
   initialState: init,
 
-  reducers: {},
+  reducers: {
+    ADD: (state, action) => {
+      const { question, answer } = action.payload;
+      return produce(state, draft => {
+        draft.currentId += 1;
+        draft.dataList.push({ question, answer });
+      });
+    },
+    UPDATE: (state, action) => {
+      const { id, answer } = action.payload;
+      return produce(state, draft => {
+        draft.currentId += 1;
+        draft.dataList[id].answer = answer;
+      });
+    },
+  },
 });
 
-export const {} = questionSlice.actions;
+export const { ADD, UPDATE } = questionSlice.actions;
 export default questionSlice.reducer;
