@@ -30,8 +30,11 @@ const questionSlice = createSlice({
         draft.currentId -= 1;
       });
     },
+    RESET: () => {
+      return init;
+    },
   },
 });
 
-export const { ADD, UPDATE, BEFORE } = questionSlice.actions;
+export const { ADD, UPDATE, BEFORE, RESET } = questionSlice.actions;
 export default questionSlice.reducer;
