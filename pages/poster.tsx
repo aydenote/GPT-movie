@@ -19,7 +19,7 @@ const preloadImages = (movieList: Movie[]) => {
   return Promise.all(images);
 };
 
-export default function poster({ movieList }: MovieListProps) {
+export default function Poster({ movieList }: MovieListProps) {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {

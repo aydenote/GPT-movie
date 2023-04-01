@@ -8,7 +8,7 @@ import questionJson from '../question.json';
 import { ReduxType } from '@/type';
 import styled from 'styled-components';
 
-export default function modal() {
+export default function Modal() {
   const questionAnswer = useSelector(state => state) as ReduxType;
   const dispatch = useDispatch();
   const router = useRouter();
@@ -67,7 +67,7 @@ export default function modal() {
   return (
     <Container>
       {
-        <Modal>
+        <ModalBox>
           <ModalHeader>
             <ModalTitle>질문</ModalTitle>
           </ModalHeader>
@@ -79,7 +79,7 @@ export default function modal() {
               <NextButton />
             </ModalFooter>
           </form>
-        </Modal>
+        </ModalBox>
       }
     </Container>
   );
@@ -92,7 +92,7 @@ const Container = styled.div`
   opacity: 0.8;
 `;
 
-const Modal = styled.div`
+const ModalBox = styled.div`
   position: absolute;
   top: 30%;
   width: 280px;

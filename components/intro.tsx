@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
-export default function LoadingScreen() {
+export default function Intro() {
   const router = useRouter();
 
   /** 2초 후 페이지 이동 */
