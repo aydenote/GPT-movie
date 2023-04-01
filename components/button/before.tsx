@@ -3,7 +3,7 @@ import { BEFORE } from '@/redux/reducers/question';
 import { ReduxType } from '@/type';
 import styled from 'styled-components';
 
-export default function before() {
+export default function Before() {
   const questionAnswer = useSelector(state => state) as ReduxType;
   const dispatch = useDispatch();
 

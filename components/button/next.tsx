@@ -3,7 +3,7 @@ import question from '../../question.json';
 import { ReduxType } from '@/type';
 import styled from 'styled-components';
 
-export default function next() {
+export default function Next() {
   const questionAnswer = useSelector(state => state) as ReduxType;
 
   return question.length - 1 === questionAnswer.currentId ? (
