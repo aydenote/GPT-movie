@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Movie } from '@/type';
 import LoadingSpinner from '@/components/LoadingSpinner ';
 import Modal from '@/components/modal';
-import { getTrendingMovie } from './api/movie';
+import { getWeekTrend } from './api/movie';
 import styled, { keyframes } from 'styled-components';
 
 type MovieListProps = {
@@ -38,7 +38,7 @@ export default function Poster({ movieList }: MovieListProps) {
 
 /** API 호출하여 페이지에 props로 Data 전달 함수 */
 export async function getStaticProps() {
-  const movieList = await getTrendingMovie();
+  const movieList = await getWeekTrend();
 
   return {
     props: { movieList },
