@@ -15,49 +15,51 @@ export default function Result() {
   const likeGenre = answerList[1];
   const likeMovie = answerList[3];
   const [answer, setAnswer] = useState<Movie | string>('');
-  const reg = /[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/\n]/gim;
 
-  /** OpenAI 영화 검색 */
-  async function handleResult() {
-    // 답변이 비어 있는 경우, result 페이지에서 새로고침
-    if (!likeGenre && !likeMovie) {
-      setAnswer('죄송합니다. 영화를 찾을 수 없습니다.');
-      return;
-    }
+  useEffect(() => {
+    const reg = /[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/\n]/gim;
 
-    try {
-      const response = await fetch('./api/generate', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          question: `${likeMovie}와 비슷한 ${likeGenre} 장르 영화명 하나만 말해줘`,
-          // question: `Tell me the name of the movie that is similar to ${likeMovie}`,
-        }),
-      });
-
-      const data = await response.json();
-      if (response.status !== 200) {
-        throw data.error || new Error(`request failed with status ${response.status}`);
+    /** OpenAI 영화 검색 */
+    async function handleResult() {
+      // 답변이 비어 있는 경우, result 페이지에서 새로고침
+      if (!likeGenre && !likeMovie) {
+        setAnswer('죄송합니다. 영화를 찾을 수 없습니다.');
+        return;
       }
-      const searchMovie = await getSearchMovie(data.result.replace(reg, ''));
-      setAnswer(searchMovie ? searchMovie : '죄송합니다. 영화를 찾을 수 없습니다.');
-      // setAnswer('죄송합니다. 영화를 찾을 수 없습니다.');
 
-    } catch (error: any) {
-      console.error(error);
-      alert(error.message);
+      try {
+        const response = await fetch('./api/generate', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            question: `${likeMovie}와 비슷한 ${likeGenre} 장르 영화명 하나만 말해줘`,
+            // question: `Tell me the name of the movie that is similar to ${likeMovie}`,
+          }),
+        });
+
+        const data = await response.json();
+        if (response.status !== 200) {
+          throw data.error || new Error(`request failed with status ${response.status}`);
+        }
+        const searchMovie = await getSearchMovie(data.result.replace(reg, ''));
+        setAnswer(searchMovie ? searchMovie : '죄송합니다. 영화를 찾을 수 없습니다.');
+        // setAnswer('죄송합니다. 영화를 찾을 수 없습니다.');
+
+      } catch (error: any) {
+        console.error(error);
+        alert(error.message);
+      }
     }
-  }
+    handleResult()
+  }, [likeGenre, likeMovie])
 
   /** 커튼 좌우 애니메이션 함수 */
   function handleCurtain() {
     document.querySelector('.curtainLeft')?.classList.toggle('clicked');
     document.querySelector('.curtainRight')?.classList.toggle('clicked');
   }
-
-  useEffect(() => { handleResult() }, [])
 
   return (
     <Container onClick={handleCurtain}>
