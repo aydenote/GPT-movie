@@ -45,7 +45,6 @@ export default function Result() {
         }
         const searchMovie = await getSearchMovie(data.result.replace(reg, ''));
         setAnswer(searchMovie ? searchMovie : '죄송합니다. 영화를 찾을 수 없습니다.');
-        // setAnswer('죄송합니다. 영화를 찾을 수 없습니다.');
 
       } catch (error: any) {
         console.error(error);
@@ -125,6 +124,9 @@ const CurtainRight = styled.div`
 
 const ResultContent = styled.div<MoviePosterProps>`
   position: absolute; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%; 
   height: 100%;
   text-align: center;
@@ -137,16 +139,5 @@ const ResultContent = styled.div<MoviePosterProps>`
     props.poster !== undefined &&
     css`
       background: url(https://image.tmdb.org/t/p/w500/${props.poster}) center no-repeat;
-    `}
-
-    @media (max-width: 800px) {
-      
-    }
-
-    @media (max-width: 600px) {
-      
-    }
-
-    @media (max-width: 400px) {
-    }
+    `}  
 `
