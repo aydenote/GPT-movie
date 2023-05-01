@@ -9,31 +9,13 @@ type MovieListProps = {
   movieList: Movie[];
 };
 
-/** 영화 포스터 이미지 로드 함수 */
-const preloadImages = (movieList: Movie[]) => {
-  const images = movieList.map(movie => {
-    const img = new Image();
-    img.src = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`;
-    return img;
-  });
-  return Promise.all(images);
-};
-
 export default function Poster({ movieList }: MovieListProps) {
-  const [isLoaded, setIsLoaded] = useState(false);
 
-  useEffect(() => {
-    preloadImages(movieList).then(() => setIsLoaded(true));
-  }, [movieList]);
-
-  return isLoaded ? (
-    <>
-      <Container movieList={movieList}></Container>
-      <Modal />
-    </>
-  ) : (
-    <LoadingSpinner />
-  );
+  return (<>
+    <Container movieList={movieList}></Container>
+    <Modal />
+  </>
+  )
 }
 
 /** API 호출하여 페이지에 props로 Data 전달 함수 */
